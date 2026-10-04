@@ -98,7 +98,14 @@ export default function InvoicePreview({ documentPage: routeDocumentPage, invoic
     host.style.height = `${paper.scrollHeight * EXPORT_SCALE}px`;
 
     try {
-      await Promise.all([...paper.querySelectorAll("img")].map((image) => image.decode()));
+      await Promise.all([...paper.querySelectorAll("img")].map(async (image) => {
+        try {
+          await image.decode();
+        } catch (error) {
+          console.warn("Skipping an invoice image that could not be decoded for export:", error);
+          image.remove();
+        }
+      }));
       return await html2canvas(host, {
         scale: 2,
         useCORS: true,
@@ -145,7 +152,13 @@ export default function InvoicePreview({ documentPage: routeDocumentPage, invoic
       onToast("Your PDF is ready to download.", "success");
     } catch (error) {
       console.error("PDF export failed:", error);
-      onToast("We couldn't create the PDF. Try printing and choosing “Save as PDF” instead.", "error");
+      const detail = error instanceof Error ? error.message.trim() : "";
+      onToast(
+        detail
+          ? `PDF export failed: ${detail.slice(0, 180)}. Try printing and choosing “Save as PDF” instead.`
+          : "We couldn't create the PDF. Try printing and choosing “Save as PDF” instead.",
+        "error",
+      );
     } finally {
       setBusy("");
     }

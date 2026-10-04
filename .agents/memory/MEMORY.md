@@ -1,0 +1,1 @@
+- [Client-side PDF export diagnostics](pdf-export-diagnostics.md) — Browser-side failures may not appear in workflow logs; verify in the embedded preview and retain the caught error.
