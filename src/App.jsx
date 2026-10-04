@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { BadgeHelp, Calculator, FileText, Files, LayoutDashboard, Menu, Settings2, Sparkles, X } from "lucide-react";
+import { Calculator, FileText, Files, LayoutDashboard, Menu, X } from "lucide-react";
 import { BrowserRouter, Navigate, NavLink, Route, Routes, useLocation } from "react-router-dom";
 import InvoiceBuilder from "./pages/InvoiceBuilder.jsx";
 import SavedInvoices from "./pages/SavedInvoices.jsx";
@@ -7,6 +7,13 @@ import RateCalculator from "./pages/RateCalculator.jsx";
 import DocumentTools from "./pages/DocumentTools.jsx";
 import { loadSavedInvoices, makeId, parseInvoiceImport, STORAGE_KEY } from "./lib/invoice.js";
 import { documentPages, getDocumentPage } from "./lib/documentPages.js";
+
+const mainNavigation = [
+  { to: "/invoice-generator/", label: "New document", Icon: LayoutDashboard, end: true },
+  { to: "/invoices", label: "Saved invoices", Icon: FileText },
+  { to: "/document-tools/", label: "Document tools", Icon: Files },
+  { to: "/hourly-rate-calculator", label: "Rate calculator", Icon: Calculator },
+];
 
 export default function App() {
   const [stored, setStored] = useState(loadSavedInvoices);
@@ -86,44 +93,9 @@ export default function App() {
   return (
     <BrowserRouter>
       <div className="app-shell">
-        <aside className="sidebar">
-          <NavLink className="brand-lockup" to="/" aria-label="Invoice Studio home">
-            <span className="brand-mark"><FileText size={19} strokeWidth={2.2} /></span>
-            <span className="brand-name">invoice<span>studio</span></span>
-          </NavLink>
-
-          <div className="sidebar-workspace">
-            <span className="workspace-avatar">S</span>
-            <span className="workspace-copy"><strong>My workspace</strong><small>Saved on this device</small></span>
-            <span className="workspace-menu-dots">···</span>
-          </div>
-
-          <span className="nav-caption">WORKSPACE</span>
-          <nav className="sidebar-nav" aria-label="Main navigation">
-            <NavLink aria-label="New document" className={({ isActive }) => `nav-link${isActive ? " active" : ""}`} end to="/invoice-generator/">
-            <LayoutDashboard size={17} /><span>New document</span>
-            </NavLink>
-            <NavLink aria-label="Saved invoices" className={({ isActive }) => `nav-link${isActive ? " active" : ""}`} to="/invoices">
-              <FileText size={17} /><span>Saved invoices</span>{stored.invoices.length > 0 && <span className="nav-count">{stored.invoices.length}</span>}
-            </NavLink>
-            <NavLink aria-label="Document tools" className={({ isActive }) => `nav-link${isActive ? " active" : ""}`} to="/document-tools/">
-              <Files size={17} /><span>Document tools</span>
-            </NavLink>
-            <NavLink aria-label="Hourly rate calculator" className={({ isActive }) => `nav-link${isActive ? " active" : ""}`} title="Hourly rate calculator" to="/hourly-rate-calculator">
-              <Calculator size={17} /><span>Rate calculator</span>
-            </NavLink>
-          </nav>
-
-          <div className="sidebar-bottom">
-            <div className="sidebar-prompt"><span className="prompt-icon"><Sparkles size={14} /></span><strong>Your documents stay on your device.</strong><p>No account, no uploads. Your drafts stay in this browser.</p></div>
-            <button aria-label="Privacy and how it works" className="sidebar-help" onClick={() => showToast("Invoice data and files stay on this device. The optional PKR estimate sends currency codes only to the exchange-rate service.", "success")} type="button"><BadgeHelp size={16} /><span>Privacy & how it works</span></button>
-            <div className="sidebar-profile"><span className="profile-avatar">Y</span><span className="profile-copy"><strong>Your workspace</strong><small>Free · no sign-up</small></span><Settings2 size={16} /></div>
-          </div>
-        </aside>
-
         <div className="main-shell">
           <RouteMetadata />
-          <WorkspaceTopbar />
+          <WorkspaceTopbar savedInvoiceCount={stored.invoices.length} />
           <Routes>
             <Route element={<Navigate replace to="/invoice-generator/" />} path="/" />
             <Route element={<Navigate replace to="/invoice-generator/" />} path="/invoice-generator" />
@@ -185,41 +157,44 @@ function RouteMetadata() {
   return null;
 }
 
-function WorkspaceTopbar() {
+function WorkspaceTopbar({ savedInvoiceCount }) {
   const [menuOpen, setMenuOpen] = useState(false);
-  const { pathname } = useLocation();
-  const section = pathname === "/hourly-rate-calculator"
-    ? "Rate calculator"
-    : pathname === "/invoices"
-      ? "Saved invoices"
-      : pathname === "/document-tools/"
-        ? "Document tools"
-        : getDocumentPage(pathname).heading;
+  const navigationLinks = (onNavigate) => mainNavigation.map(({ to, label, Icon, end }) => (
+    <NavLink
+      aria-label={label}
+      className={({ isActive }) => `nav-link${isActive ? " active" : ""}`}
+      end={end}
+      key={to}
+      onClick={onNavigate}
+      to={to}
+    >
+      <Icon aria-hidden="true" size={19} strokeWidth={2} />
+      <span>{label}</span>
+      {label === "Saved invoices" && savedInvoiceCount > 0 && <span className="nav-count">{savedInvoiceCount}</span>}
+    </NavLink>
+  ));
 
   return (
     <header className="topbar">
-      <div className="mobile-brand"><span className="brand-mark"><FileText size={17} strokeWidth={2.2} /></span><span className="brand-name">invoice<span>studio</span></span></div>
-      <div className="topbar-location"><span className="topbar-breadcrumb-muted">My workspace</span><span>/</span><strong>{section}</strong></div>
-      <div className="topbar-right">
-        <span className="privacy-status"><span />Private on this device</span>
-        <span className="topbar-divider" />
-        <span className="topbar-initial" aria-hidden="true">Y</span>
-        <button
-          aria-controls="mobile-primary-navigation"
-          aria-expanded={menuOpen}
-          aria-label={menuOpen ? "Close navigation" : "Open navigation"}
-          className="mobile-nav-toggle"
-          onClick={() => setMenuOpen((open) => !open)}
-          type="button"
-        >
-          {menuOpen ? <X size={18} /> : <Menu size={18} />}
-        </button>
-      </div>
-      <nav aria-label="Mobile navigation" className="mobile-primary-nav" hidden={!menuOpen} id="mobile-primary-navigation">
-        <NavLink aria-label="New document" onClick={() => setMenuOpen(false)} to="/invoice-generator/">New document</NavLink>
-        <NavLink aria-label="Saved invoices" onClick={() => setMenuOpen(false)} to="/invoices">Saved invoices</NavLink>
-        <NavLink aria-label="Document tools" onClick={() => setMenuOpen(false)} to="/document-tools/">Document tools</NavLink>
-        <NavLink aria-label="Hourly rate calculator" onClick={() => setMenuOpen(false)} to="/hourly-rate-calculator">Rate calculator</NavLink>
+      <NavLink className="brand-lockup" to="/" aria-label="Invoice Studio home">
+        <span className="brand-mark"><FileText size={20} strokeWidth={2.2} /></span>
+        <span className="brand-name">invoice<span>studio</span></span>
+      </NavLink>
+      <nav aria-label="Main navigation" className="primary-nav">
+        {navigationLinks()}
+      </nav>
+      <button
+        aria-controls="mobile-primary-navigation"
+        aria-expanded={menuOpen}
+        aria-label={menuOpen ? "Close navigation" : "Open navigation"}
+        className="mobile-nav-toggle"
+        onClick={() => setMenuOpen((open) => !open)}
+        type="button"
+      >
+        {menuOpen ? <X size={20} /> : <Menu size={20} />}
+      </button>
+      <nav aria-label="Mobile main navigation" className="mobile-primary-nav" hidden={!menuOpen} id="mobile-primary-navigation">
+        {navigationLinks(() => setMenuOpen(false))}
       </nav>
     </header>
   );
