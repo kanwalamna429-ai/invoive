@@ -47,6 +47,7 @@ export const createEmptyInvoice = () => {
     paymentInstructions: "",
     paymentMethod: "none",
     paymentUrl: "",
+    paymentEmail: "",
     paymentDetails: "",
     items: [{ id: makeId(), description: "", quantity: 1, unitPrice: 0 }],
   };
@@ -226,7 +227,8 @@ export function createInvoiceText(invoice) {
     `Balance due: ${formatMoney(totals.remainingBalance, invoice.currency, invoice.locale)}`,
     ...(invoice.notes ? ["", `Notes: ${invoice.notes}`] : []),
     ...(invoice.paymentInstructions ? [`Payment: ${invoice.paymentInstructions}`] : []),
-    ...(invoice.paymentUrl ? [`Payment link: ${invoice.paymentUrl}`] : []),
+    ...(invoice.paymentUrl && invoice.paymentMethod !== "paypal" ? [`Payment link: ${invoice.paymentUrl}`] : []),
+    ...(invoice.paymentEmail && invoice.paymentMethod === "paypal" ? [`PayPal email: ${invoice.paymentEmail}`] : []),
     ...(invoice.paymentDetails ? [`${invoice.paymentMethod === "upi" ? "UPI ID" : invoice.paymentMethod === "wallet" ? "Wallet address" : "Bank transfer details"}: ${invoice.paymentDetails}`] : []),
   ];
 

@@ -1525,3 +1525,94 @@ body,
     width: 100%;
   }
 }
+
+.business-identity-row {
+  grid-template-columns: 100px minmax(0, 1fr);
+  gap: 13px;
+}
+
+.logo-picker-wrap {
+  display: flex;
+  align-items: center;
+}
+
+.logo-picker {
+  display: flex;
+  width: 94px;
+  height: 66px;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 4px;
+  overflow: hidden;
+  border: 1px solid #526b9e;
+  border-radius: 11px;
+  color: #334f91;
+  background: #f5f7fc;
+  box-shadow: 0 2px 7px rgba(51, 79, 145, .12);
+}
+
+.logo-picker:hover {
+  border-color: #29477f;
+  color: #29477f;
+  background: #eef2fa;
+  box-shadow: 0 3px 9px rgba(51, 79, 145, .18);
+}
+
+.logo-picker:focus-within,
+.logo-picker-wrap:focus-within .logo-picker {
+  outline: 3px solid rgba(51, 79, 145, .24);
+  outline-offset: 2px;
+}
+
+.logo-picker > img {
+  width: 27px;
+  height: 25px;
+  object-fit: contain;
+}
+
+.logo-picker-caption {
+  color: #263e70;
+  font-size: 10px;
+  font-weight: 700;
+  line-height: 1.1;
+}
+
+.logo-upload-plus {
+  top: 5px;
+  right: 5px;
+  bottom: auto;
+  width: 16px;
+  height: 16px;
+  color: #fff;
+  background: #334f91;
+}
+
+.remove-logo {
+  margin-left: 109px;
+}
+
+.invoice-paper .paper-business strong,
+.invoice-paper .paper-business > span,
+.invoice-paper .paper-title span,
+.invoice-paper .paper-title strong,
+.invoice-paper .paper-client > strong,
+.invoice-paper .paper-client > span:not(.paper-label),
+.invoice-paper .paper-dates > div > strong,
+.invoice-paper .paper-dates > div > span,
+.invoice-paper .paper-table-head,
+.invoice-paper .paper-table-row > span:first-child,
+.invoice-paper .paper-table-row > strong,
+.invoice-paper .paper-total,
+.invoice-paper .paper-total strong,
+.invoice-paper .paper-footer,
+.invoice-paper .paper-label,
+.invoice-paper .amount-row,
+.invoice-paper .paper-empty-row,
+.invoice-paper .paper-payment-qr strong,
+.invoice-paper .paper-payment-qr span,
+.invoice-paper .paper-payment-link,
+.invoice-paper .paper-equivalent,
+.invoice-paper .paper-exchange-source {
+  color: #171717;
+}

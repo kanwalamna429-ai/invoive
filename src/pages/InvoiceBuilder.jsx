@@ -215,6 +215,7 @@ export default function InvoiceBuilder({ documentPage, invoices, onSave, onToast
               <div className="logo-picker-wrap">
                 <label className={`logo-picker${invoice.logo ? " has-logo" : ""}`} htmlFor="logo-upload">
                   {invoice.logo ? <img src={invoice.logo} alt="Business logo preview" /> : <ImagePlus size={19} />}
+                  <span className="logo-picker-caption">{invoice.logo ? "Change logo" : "Upload logo"}</span>
                   <span className="logo-upload-plus"><Plus size={12} /></span>
                 </label>
                 <input accept="image/*" aria-label="Upload business logo" className="visually-hidden" id="logo-upload" onChange={handleLogo} type="file" />
@@ -436,7 +437,18 @@ export default function InvoiceBuilder({ documentPage, invoices, onSave, onToast
                     <ChevronDown size={14} />
                   </span>
                 </label>
-                {["url", "paypal", "stripe", "wise", "custom"].includes(invoice.paymentMethod) && (
+                {invoice.paymentMethod === "paypal" && (
+                  <FormField
+                    id="paymentEmail"
+                    label="PayPal email address"
+                    onChange={(value) => change("paymentEmail", value)}
+                    placeholder="you@example.com"
+                    maxLength={254}
+                    type="email"
+                    value={invoice.paymentEmail || ""}
+                  />
+                )}
+                {["url", "stripe", "wise", "custom"].includes(invoice.paymentMethod) && (
                   <FormField
                     id="paymentUrl"
                     label={invoice.paymentMethod === "url" || invoice.paymentMethod === "custom" ? "Payment URL" : `${paymentMethods.find(([value]) => value === invoice.paymentMethod)?.[1]} URL`}

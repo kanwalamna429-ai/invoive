@@ -353,9 +353,10 @@ export default function InvoicePreview({ documentPage: routeDocumentPage, invoic
               <div className="paper-payment-qr">
                 <QRCodeSVG aria-label="Payment QR code" bgColor="#ffffff" fgColor="#26334d" includeMargin level="M" size={96} value={paymentQr.value} />
                 <div>
-                  <strong>{invoice.paymentMethod === "bank" ? "SCAN FOR PAYMENT DETAILS" : "SCAN TO PAY"}</strong>
+                  <strong>{invoice.paymentMethod === "paypal" ? "PAYPAL EMAIL" : invoice.paymentMethod === "bank" ? "SCAN FOR PAYMENT DETAILS" : "SCAN TO PAY"}</strong>
                   <span>{paymentQr.description}</span>
-                  {invoice.paymentUrl && <a className="paper-payment-link" href={invoice.paymentUrl} rel="noreferrer" target="_blank">{invoice.paymentUrl}</a>}
+                  {invoice.paymentMethod !== "paypal" && invoice.paymentUrl && <a className="paper-payment-link" href={invoice.paymentUrl} rel="noreferrer" target="_blank">{invoice.paymentUrl}</a>}
+                  {invoice.paymentMethod === "paypal" && invoice.paymentEmail && <span className="paper-payment-details">PayPal email: {invoice.paymentEmail}</span>}
                   {invoice.paymentDetails && <span className="paper-payment-details">{invoice.paymentMethod === "upi" ? "UPI ID: " : invoice.paymentMethod === "wallet" ? "Wallet: " : ""}{invoice.paymentDetails}</span>}
                 </div>
               </div>
@@ -395,11 +396,20 @@ function getPaymentQr(invoice, totals) {
   if (method === "none") return { value: "", description: "" };
   if (totals.remainingBalance <= 0) return { value: "", description: "No balance due." };
 
-  if (["url", "paypal", "stripe", "wise", "custom"].includes(method)) {
+  if (method === "paypal") {
+    const email = invoice.paymentEmail?.trim() || "";
+    if (!email) return { value: "", description: "Add a PayPal email address to create a QR code." };
+    if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
+      return { value: "", description: "Enter a valid PayPal email address." };
+    }
+    return checkedQrValue(email, "PayPal email");
+  }
+
+  if (["url", "stripe", "wise", "custom"].includes(method)) {
     try {
       const url = new URL(invoice.paymentUrl);
       if (!["http:", "https:"].includes(url.protocol)) throw new Error("Payment links must use http or https.");
-      const labels = { url: "Payment link", paypal: "PayPal", stripe: "Stripe", wise: "Wise", custom: "Custom payment link" };
+      const labels = { url: "Payment link", stripe: "Stripe", wise: "Wise", custom: "Custom payment link" };
       return checkedQrValue(url.href, labels[method]);
     } catch {
       return { value: "", description: invoice.paymentUrl ? "Enter a valid http or https payment link." : "Add a payment link to create a QR code." };
