@@ -647,6 +647,250 @@ a { color: inherit; text-decoration: none; }
   .local-data-actions .secondary-button { justify-content: center; padding: 0 6px; }
 }
 
+/* Readability: larger interface type, stronger text contrast, and easier-to-use controls. */
+:root {
+  --ink: #25334d;
+  --muted: #5c6980;
+  --line: #dce2ec;
+  --blue: #334f91;
+  --card-shadow: 0 4px 18px rgba(34, 48, 81, 0.055), 0 1px 3px rgba(34, 48, 81, 0.035);
+}
+
+button:focus-visible, a:focus-visible, input:focus-visible, textarea:focus-visible, select:focus-visible {
+  outline: 3px solid #315fbd;
+  outline-offset: 3px;
+}
+.brand-mark { width: 36px; height: 36px; border-radius: 11px; }
+.brand-name { font-size: 18px; letter-spacing: -.6px; }
+.brand-name > span { color: #536a98; }
+.sidebar-workspace { padding: 11px 10px; }
+.workspace-avatar { width: 36px; height: 36px; font-size: 15px; }
+.workspace-copy strong, .profile-copy strong { color: #34425d; font-size: 13px; }
+.workspace-copy small, .profile-copy small { color: #5e6a80; font-size: 12px; }
+.workspace-menu-dots { color: #65718a; font-size: 18px; }
+.nav-caption { color: #5e6b82; font-size: 11px; letter-spacing: 1px; }
+.nav-link { min-height: 46px; gap: 12px; padding: 0 11px; color: #4e5d77; font-size: 14px; }
+.nav-link.active { color: #2f4d8e; background: #eaf0fb; }
+.nav-shortcut { color: #66738b; font-size: 11px; }
+.nav-count { min-width: 23px; height: 23px; color: #435675; font-size: 12px; }
+.sidebar-prompt { padding: 16px 13px; }
+.prompt-icon { width: 30px; height: 30px; }
+.sidebar-prompt strong { color: #34425d; font-size: 12px; }
+.sidebar-prompt p { color: #596780; font-size: 12px; line-height: 1.55; }
+.sidebar-help { min-height: 44px; color: #53617a; font-size: 13px; }
+.profile-avatar { width: 34px; height: 34px; font-size: 14px; }
+.main-shell { color: #283650; }
+.topbar { min-height: 62px; height: auto; }
+.topbar-location { color: #627089; font-size: 13px; }
+.topbar-location strong { color: #34425d; }
+.topbar-right { color: #4f5e77; font-size: 12px; }
+.privacy-status > span { width: 8px; height: 8px; background: #32754e; }
+.topbar-initial { width: 32px; height: 32px; font-size: 13px; }
+.builder-page, .saved-page, .tools-page { padding-top: 30px; padding-bottom: 50px; }
+.calculator-page { padding-top: 34px; padding-bottom: 56px; }
+.page-heading { margin-bottom: 28px; }
+.breadcrumbs { gap: 9px; margin-bottom: 13px; color: #59677f; font-size: 12px; }
+.breadcrumbs strong { color: #34435f; }
+.page-heading h1 { font-size: 30px; letter-spacing: -.75px; line-height: 1.25; }
+.page-heading p { color: #526079; font-size: 15px; line-height: 1.55; }
+.document-legal-note { padding: 13px 15px; color: #514b38; font-size: 12px; line-height: 1.6; }
+.tools-eyebrow, .calculator-eyebrow { color: #435984; font-size: 11px; letter-spacing: .7px; }
+.tool-group { padding: 24px 0; }
+.tool-group-heading { margin-bottom: 16px; }
+.tool-group-heading h2 { color: #2f3e59; font-size: 19px; }
+.tool-group-heading p { color: #53617a; font-size: 14px; line-height: 1.6; }
+.tool-link-grid { gap: 12px; }
+.tool-link-card { gap: 12px; padding: 15px; border-color: #d9e0eb; border-radius: 11px; }
+.tool-link-icon { width: 36px; height: 36px; border-radius: 9px; }
+.tool-link-copy { gap: 6px; }
+.tool-link-copy strong { color: #34425d; font-size: 14px; line-height: 1.35; }
+.tool-link-copy small { color: #53617a; font-size: 12px; line-height: 1.5; }
+.tool-link-arrow { color: #536584; }
+.primary-button, .secondary-button { min-height: 44px; padding: 0 16px; border-radius: 9px; font-size: 14px; }
+.primary-button { background: #334f91; border-color: #334f91; }
+.primary-button:hover { background: #263f79; }
+.primary-button.is-saved { color: #fff; background: #347455; border-color: #347455; }
+.secondary-button { color: #3f4d67; border-color: #cbd4e2; }
+.secondary-button:hover { color: #29467f; border-color: #9eacc4; background: #f6f8fc; }
+.workspace-grid { gap: 22px; }
+.form-column { gap: 16px; }
+.form-card { padding: 22px; border-color: #dfe4ed; border-radius: 13px; }
+.section-heading { gap: 12px; padding-bottom: 16px; margin-bottom: 17px; border-bottom-color: #e1e6ef; }
+.section-icon { width: 38px; height: 38px; border-radius: 10px; color: #38558f; }
+.section-heading h2, .calculator-card .section-heading-copy h2 { color: #2f3e59; font-size: 16px; letter-spacing: 0; }
+.section-heading p { color: #59677f; font-size: 12px; line-height: 1.5; }
+.section-number { color: #59677f; font-size: 11px; }
+.field-label { gap: 8px; margin-bottom: 14px; color: #34435d; font-size: 13px; line-height: 1.4; }
+.form-input.input, .form-input.select, .form-input.textarea {
+  min-height: 46px;
+  height: 46px;
+  padding: 0 12px;
+  border-color: #aeb9ca;
+  border-radius: 8px;
+  color: #273650;
+  font-size: 14px;
+}
+.form-input::placeholder { color: #68758b; }
+.form-input.input:hover, .form-input.select:hover, .form-input.textarea:hover { border-color: #74849e; }
+.form-input.input:focus, .form-input.select:focus, .form-input.textarea:focus { border-color: #3b5e9f; box-shadow: 0 0 0 3px rgba(59, 94, 159, .16); }
+.form-input.textarea { height: auto; min-height: 88px; padding: 10px 12px; line-height: 1.5; }
+.select-wrap > svg { top: 16px; color: #53617a; }
+.business-identity-row { grid-template-columns: 48px minmax(0, 1fr); gap: 13px; margin-bottom: 14px; }
+.logo-picker { width: 48px; height: 48px; }
+.remove-logo { margin-left: 61px; color: #874b55; font-size: 12px; }
+.currency-conversion-toggle { gap: 10px; padding: 12px; color: #36445e; background: #f7f9fc; font-size: 12px; line-height: 1.5; }
+.currency-conversion-toggle input { width: 17px; height: 17px; }
+.currency-conversion-toggle strong { font-size: 13px; }
+.currency-conversion-toggle small { color: #526079; font-size: 12px; }
+.country-mode-note { padding: 12px; color: #35435e; background: #f6f8fc; }
+.country-mode-note strong, .country-fields-heading strong { color: #34425d; font-size: 12px; }
+.country-mode-note span, .country-fields-heading small { color: #53617a; font-size: 12px; line-height: 1.55; }
+.country-fields-section { padding-top: 16px; }
+.country-fields-heading { margin-bottom: 12px; }
+.country-field-row { grid-template-columns: minmax(0, .82fr) minmax(0, 1fr) 36px; gap: 9px; }
+.country-field-row .form-input, .item-input-row .form-input.input { font-size: 13px; }
+.country-field-remove, .item-remove { width: 36px; height: 40px; color: #53617a; }
+.payment-privacy-note { color: #526079; font-size: 12px; line-height: 1.6; }
+.items-label-row { grid-template-columns: minmax(0, 1fr) 58px 78px 36px; gap: 8px; margin-bottom: 8px; color: #4f5e77; font-size: 11px; letter-spacing: .4px; }
+.item-input-row { grid-template-columns: minmax(0, 1fr) 58px 78px 36px; gap: 8px; }
+.item-input-row .form-input.input { padding: 0 9px; }
+.item-remove { height: 42px; }
+.add-item-button { min-height: 40px; gap: 7px; margin-top: 12px; color: #334f91; font-size: 13px; }
+.add-item-button:hover { color: #263f79; }
+.adjustments-divider { margin: 18px 0 16px; background: #e1e6ef; }
+.input-with-suffix > span:not(.daisy-suffix), .input-with-prefix > span { color: #53617a; font-size: 13px; }
+.discount-input > .form-input.input { padding-right: 50px; }
+.discount-type { max-width: 46px; color: #43536f; font-size: 11px; }
+.form-footer-note { gap: 8px; padding-top: 12px; color: #53617a; font-size: 12px; line-height: 1.5; }
+.template-grid { gap: 10px; }
+.template-option { gap: 7px; padding: 10px; border-color: #cbd4e2; }
+.template-thumbnail { height: 84px; }
+.template-option strong { color: #34425d; font-size: 12px; }
+.template-option small { color: #526079; font-size: 11px; line-height: 1.45; }
+.design-controls-heading strong { color: #34425d; font-size: 13px; }
+.design-controls-heading > span, .design-help { color: #526079; font-size: 12px; line-height: 1.55; }
+.design-color-control { min-height: 42px; }
+.design-color-control > span { color: #34425d; font-size: 12px; }
+.design-reset-button { min-height: 34px; padding: 5px 10px; color: #3f4d67; font-size: 12px; }
+.preview-toolbar { min-height: 68px; height: auto; padding: 10px 16px; }
+.preview-heading h2 { color: #34425d; font-size: 14px; }
+.preview-heading p { color: #53617a; font-size: 12px; }
+.icon-button { width: 42px; height: 42px; border-color: #cbd4e2; color: #43516b; }
+.export-button { min-height: 42px; height: auto; padding: 0 12px; color: #3f4d67; font-size: 13px; }
+.export-menu { width: 205px; padding: 7px; }
+.export-menu-item { min-height: 42px; padding: 9px 10px; color: #3f4d67; font-size: 13px; }
+.invoice-check { padding: 15px 17px; }
+.invoice-check-heading h3 { color: #34425d; font-size: 13px; }
+.invoice-check-status { color: #326a49; font-size: 12px; }
+.invoice-check ul { gap: 10px 14px; margin-top: 13px; }
+.invoice-check li { color: #53617a; font-size: 12px; }
+.invoice-check li > span { color: #32734f; font-size: 13px; }
+.invoice-check li.check-failed, .invoice-check li.check-failed > span { color: #8b3e49; }
+.preview-footnote { gap: 9px; padding: 12px; color: #53617a; font-size: 12px; }
+.preview-footnote-icon { width: 22px; height: 22px; color: #2f6848; }
+.exchange-rate-note, .payment-config-note { padding: 11px 15px; color: #4f5d74; font-size: 12px; line-height: 1.55; }
+.exchange-rate-error { color: #873f49; }
+.payment-config-note { color: #68521f; }
+.local-data-card { gap: 18px; padding: 17px 19px; }
+.local-data-icon { width: 38px; height: 38px; }
+.local-data-copy { gap: 12px; }
+.local-data-copy strong { color: #34425d; font-size: 13px; }
+.local-data-copy small { color: #526079; font-size: 12px; line-height: 1.55; }
+.local-data-actions { gap: 8px; }
+.local-data-actions .secondary-button { min-height: 44px; padding: 0 12px; font-size: 12px; }
+.delete-local-data { color: #874b55; }
+.delete-local-data:hover:not(:disabled) { color: #7b3540; }
+.saved-card-top { padding: 21px 23px; }
+.saved-card-top h2 { color: #34425d; font-size: 17px; }
+.saved-card-top p { color: #53617a; font-size: 12px; }
+.saved-count { color: #435984; font-size: 20px; }
+.saved-invoice-row { min-height: 82px; gap: 14px; padding: 13px 22px; }
+.saved-invoice-icon { width: 40px; height: 40px; }
+.saved-invoice-details { gap: 5px; }
+.saved-invoice-details > strong { color: #34425d; font-size: 14px; }
+.saved-invoice-details > span { color: #526079; font-size: 12px; }
+.saved-invoice-total > span { color: #526079; font-size: 11px; }
+.saved-invoice-total > strong { color: #34425d; font-size: 14px; }
+.saved-invoice-actions { gap: 7px; }
+.edit-invoice-button { min-height: 40px; height: auto; padding: 0 11px; color: #344f87; font-size: 12px; }
+.saved-storage-note { gap: 9px; padding: 15px 22px; color: #526079; font-size: 12px; }
+.empty-invoices { min-height: 390px; padding: 40px 24px; }
+.empty-invoices h2 { font-size: 20px; }
+.empty-invoices > p { color: #53617a; font-size: 14px; line-height: 1.6; }
+.empty-privacy { color: #53617a; font-size: 12px; }
+.saved-tip { padding: 14px 16px; }
+.saved-tip > span { width: 32px; height: 32px; color: #635421; }
+.saved-tip p { color: #5a4d2a; font-size: 13px; line-height: 1.55; }
+.calculator-layout { gap: 20px; }
+.calculator-card { padding: 23px; }
+.calculator-fields { gap: 3px 16px; }
+.calculator-field { gap: 8px; margin-bottom: 15px; color: #34435d; font-size: 13px; }
+.calculator-field small { color: #53617a; font-size: 12px; line-height: 1.55; }
+.calculator-input-affix { color: #53617a; font-size: 13px; }
+.calculator-assumption { padding: 13px; color: #5b4e2d; font-size: 12px; line-height: 1.6; }
+.calculator-error { padding: 12px; color: #873f49; font-size: 13px; }
+.calculator-result-card { padding: 24px 22px 20px; }
+.calculator-result-icon { width: 40px; height: 40px; }
+.calculator-result-label { color: #52617a; font-size: 11px; letter-spacing: .7px; }
+.calculator-hourly-rate, .calculator-project-price { color: #2e4267; font-size: 32px; }
+.calculator-hourly-rate small { color: #53617a; font-size: 13px; }
+.calculator-project-price { color: #286744; font-size: 28px; }
+.calculator-result-card > p { color: #53617a; font-size: 12px; line-height: 1.6; }
+.calculator-create-button { min-height: 46px; }
+.calculator-private-note { color: #53617a; font-size: 11px; }
+.calculator-explainer { padding: 23px 25px; }
+.calculator-explainer h2 { color: #2f3e59; font-size: 18px; }
+.calculator-explainer p { color: #53617a; font-size: 13px; line-height: 1.7; }
+.calculator-formula { padding: 11px 13px; color: #435579; font-size: 12px; line-height: 1.6; }
+.calculator-formula strong { color: #344769; }
+.calculator-disclaimer { color: #526079 !important; font-size: 12px !important; }
+.toast-message { padding: 14px 17px; color: #315f42; font-size: 13px; }
+.toast-message.toast-error { color: #873f49; }
+
+@media (max-width: 680px) {
+  .topbar { min-height: 60px; height: auto; padding: 8px 15px; }
+  .mobile-brand .brand-mark { width: 32px; height: 32px; }
+  .mobile-brand .brand-name { font-size: 16px; }
+  .topbar-right { gap: 9px; font-size: 12px; }
+  .topbar-right .privacy-status, .topbar-divider, .topbar-initial { display: none; }
+  .mobile-nav-toggle { width: 44px; height: 44px; }
+  .mobile-primary-nav a { min-height: 48px; padding: 0 13px; font-size: 14px; }
+  .builder-page, .saved-page, .tools-page { padding: 23px 16px 38px; }
+  .calculator-page { padding: 24px 16px 40px; }
+  .page-heading { margin-bottom: 21px; }
+  .page-heading h1 { font-size: 26px; }
+  .page-heading p { max-width: 100%; font-size: 14px; }
+  .builder-page .page-heading-main { align-items: flex-start; flex-direction: column; gap: 14px; }
+  .heading-actions { flex-wrap: wrap; gap: 8px; }
+  .heading-actions .primary-button, .heading-actions .secondary-button { min-height: 44px; padding: 0 12px; font-size: 12px; }
+  .heading-actions .saved-link { width: 44px; min-width: 44px; }
+  .form-card { padding: 19px 17px; }
+  .calculator-card { padding: 19px 17px; }
+  .calculator-result-card { padding: 21px; }
+  .calculator-explainer { padding: 19px; }
+  .saved-card-top { padding: 17px; }
+  .saved-invoice-row { gap: 9px; padding: 12px; }
+  .saved-invoice-actions { max-width: 140px; }
+  .saved-invoice-actions .icon-button { width: 40px; height: 40px; }
+  .local-data-card { padding: 15px; }
+  .local-data-actions .secondary-button { min-height: 44px; font-size: 12px; }
+  .tool-link-card { padding: 13px; }
+}
+
+@media (max-width: 400px) {
+  .builder-page, .saved-page, .tools-page { padding-right: 12px; padding-left: 12px; }
+  .calculator-page { padding-right: 12px; padding-left: 12px; }
+  .field-grid.two { grid-template-columns: minmax(0, 1fr); gap: 0; }
+  .page-heading h1 { font-size: 24px; }
+  .page-heading-main { gap: 12px; }
+  .heading-actions .primary-button, .heading-actions .secondary-button { min-height: 44px; padding: 0 9px; font-size: 12px; }
+  .form-card { padding-right: 13px; padding-left: 13px; }
+  .items-label-row, .item-input-row { grid-template-columns: minmax(0, 1fr) 52px 68px 34px; gap: 6px; }
+  .country-field-row { grid-template-columns: minmax(0, .82fr) minmax(0, 1fr) 34px; gap: 6px; }
+  .saved-invoice-actions { max-width: 120px; }
+  .local-data-actions { gap: 7px; }
+}
+
 @media print {
   @page { size: A4; margin: 10mm; }
   html, body, #root, .app-shell, .main-shell { min-height: 0 !important; width: auto !important; margin: 0 !important; padding: 0 !important; overflow: visible !important; background: #fff !important; }
