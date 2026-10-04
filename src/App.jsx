@@ -111,6 +111,7 @@ export default function App() {
             <Route element={<RateCalculator />} path="/hourly-rate-calculator" />
             <Route element={<Navigate replace to="/invoice-generator/" />} path="*" />
           </Routes>
+          <SiteFooter />
         </div>
         {toast && <div className={`toast-message ${toast.kind === "error" ? "toast-error" : ""}`} role={toast.kind === "error" ? "alert" : "status"}>{toast.kind !== "error" && <span className="toast-check">✓</span>}{toast.message}</div>}
       </div>
@@ -197,5 +198,37 @@ function WorkspaceTopbar({ savedInvoiceCount }) {
         {navigationLinks(() => setMenuOpen(false))}
       </nav>
     </header>
+  );
+}
+
+function SiteFooter() {
+  const year = new Date().getFullYear();
+
+  return (
+    <footer className="site-footer">
+      <div className="site-footer-inner">
+        <div className="site-footer-main">
+          <div className="site-footer-brand">
+            <NavLink aria-label="Invoice Studio home" className="brand-lockup" to="/">
+              <span className="brand-mark"><FileText size={19} strokeWidth={2.2} /></span>
+              <span className="brand-name">invoice<span>studio</span></span>
+            </NavLink>
+            <p>Professional business documents, made simple.</p>
+          </div>
+          <nav aria-label="Footer navigation" className="site-footer-nav">
+            <NavLink to="/invoice-generator/">New document</NavLink>
+            <NavLink to="/invoices">Saved invoices</NavLink>
+            <NavLink to="/document-tools/">Document tools</NavLink>
+            <NavLink to="/hourly-rate-calculator">Rate calculator</NavLink>
+          </nav>
+        </div>
+      </div>
+      <div className="site-footer-bottom">
+        <div className="site-footer-bottom-inner">
+          <span>© {year} Invoice Studio</span>
+          <span>Free business document tools</span>
+        </div>
+      </div>
+    </footer>
   );
 }
